@@ -212,5 +212,17 @@
     "hoverSpriteId": -19802,
     "selectedSpriteId": -19803,
     "disabledSpriteId": -19804
+  },
+  {
+    "spriteId": -19900,
+    "fileName": "/BookOfTheDeadMap/BookOfTheDead.png",
+    "hoverSpriteId": -19901,
+    "disabledSpriteId": -19902
+  },
+  {
+    "spriteId": -19903,
+    "fileName": "/BookOfTheDeadMap/Memoirs.png",
+    "hoverSpriteId": -19904,
+    "disabledSpriteId": -19905
   }
 ]
