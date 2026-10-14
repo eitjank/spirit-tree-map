@@ -14,9 +14,6 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
-import net.runelite.api.ItemContainer;
-import net.runelite.api.gameval.InventoryID;
-import net.runelite.api.gameval.ItemID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetType;
 import net.runelite.client.callback.ClientThread;
@@ -39,12 +36,10 @@ public class BookOfTheDeadMap extends BaseMap implements IChatOptionsMap
 	private static final int MAP_SPRITE_HEIGHT = 317;
 	private static final int MAP_SPRITE_X = 2;
 	private static final int MAP_SPRITE_Y = 13;
-	private static final int BOOK_OF_THE_DEAD_SPRITE_ID = -19900;
-	private static final int BOOK_OF_THE_DEAD_HIGHLIGHTED_SPRITE_ID = -19901;
-	private static final int BOOK_OF_THE_DEAD_DISABLED_SPRITE_ID = -19902;
-	private static final int MEMOIRS_SPRITE_ID = -19903;
-	private static final int MEMOIRS_HIGHLIGHTED_SPRITE_ID = -19904;
-	private static final int MEMOIRS_DISABLED_SPRITE_ID = -19905;
+	/* A lancallium rose, after the "Lunch by the Lancalliums" page */
+	private static final int ROSE_SPRITE_ID = -19900;
+	private static final int ROSE_HIGHLIGHTED_SPRITE_ID = -19901;
+	private static final int ROSE_DISABLED_SPRITE_ID = -19902;
 
 	private static final String DIALOG_TITLE = "What would you like to remember?";
 	/* Matches an option such as "'Lunch by the Lancalliums' - Hosidius";
@@ -129,8 +124,6 @@ public class BookOfTheDeadMap extends BaseMap implements IChatOptionsMap
 	{
 		this.clearTeleports();
 
-		boolean bookOfTheDead = this.hasBookOfTheDead();
-
 		for (BookOfTheDeadDefinition definition : this.definitions)
 		{
 			Widget widgetContainer = container.createChild(-1, WidgetType.GRAPHIC);
@@ -139,10 +132,7 @@ public class BookOfTheDeadMap extends BaseMap implements IChatOptionsMap
 			UITeleport teleport = new UITeleport(widgetContainer, teleportWidget);
 
 			teleport.setPosition(x + definition.getX(), y + definition.getY());
-			if (bookOfTheDead)
-				teleport.setTeleportSprites(BOOK_OF_THE_DEAD_SPRITE_ID, BOOK_OF_THE_DEAD_HIGHLIGHTED_SPRITE_ID, BOOK_OF_THE_DEAD_DISABLED_SPRITE_ID);
-			else
-				teleport.setTeleportSprites(MEMOIRS_SPRITE_ID, MEMOIRS_HIGHLIGHTED_SPRITE_ID, MEMOIRS_DISABLED_SPRITE_ID);
+			teleport.setTeleportSprites(ROSE_SPRITE_ID, ROSE_HIGHLIGHTED_SPRITE_ID, ROSE_DISABLED_SPRITE_ID);
 			teleport.setSize(BookOfTheDeadDefinition.getWidth(), BookOfTheDeadDefinition.getHeight());
 			teleport.setName(definition.getName());
 
@@ -175,23 +165,6 @@ public class BookOfTheDeadMap extends BaseMap implements IChatOptionsMap
 
 			this.addTeleport(teleport);
 		}
-	}
-
-	/**
-	 * The Book of the dead and Kharedst's memoirs share the dialog, so the
-	 * icons follow whichever the player is carrying. The book is made from
-	 * the memoirs, so players rarely carry both.
-	 */
-	private boolean hasBookOfTheDead()
-	{
-		return this.containsItem(InventoryID.WORN, ItemID.BOOK_OF_THE_DEAD)
-			|| this.containsItem(InventoryID.INV, ItemID.BOOK_OF_THE_DEAD);
-	}
-
-	private boolean containsItem(int inventoryId, int itemId)
-	{
-		ItemContainer container = this.client.getItemContainer(inventoryId);
-		return container != null && container.contains(itemId);
 	}
 
 	private void triggerLockedMessage(BookOfTheDeadDefinition definition)

@@ -215,14 +215,8 @@
   },
   {
     "spriteId": -19900,
-    "fileName": "/BookOfTheDeadMap/BookOfTheDead.png",
+    "fileName": "/BookOfTheDeadMap/Rose.png",
     "hoverSpriteId": -19901,
     "disabledSpriteId": -19902
-  },
-  {
-    "spriteId": -19903,
-    "fileName": "/BookOfTheDeadMap/Memoirs.png",
-    "hoverSpriteId": -19904,
-    "disabledSpriteId": -19905
   }
 ]

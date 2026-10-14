@@ -6,9 +6,9 @@ import lombok.Getter;
 public class BookOfTheDeadDefinition
 {
 	@Getter
-	static private int width = 31;
+	static private int width = 28;
 	@Getter
-	static private int height = 28;
+	static private int height = 25;
 
 	/* The destination as named in the dialog option, e.g. "Hosidius" */
 	private String name;
